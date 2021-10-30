@@ -1,0 +1,40 @@
+.filterSetter {
+  background-color: white;
+  border-radius: 50px;
+  display: flex;
+  color: #494949;
+  padding: 0px 5px 0px 0px;
+  width: auto;
+  overflow: hidden;
+  align-items: center;
+  &__select + &__select {
+  }
+  &__selectTitle {
+    font-weight: 500;
+  }
+  &__selectDesc {
+    color: #494949bd;
+    font-weight: 300;
+  }
+  &__select {
+    flex: 1;
+    position: relative;
+    padding-right: 38px;
+    padding-left: 30px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    &:before {
+      content: "";
+      width: 0.063em;
+      position: absolute;
+      left: 0px;
+      height: 40px;
+      background-color: rgba(0, 0, 0, 0.205);
+    }
+    &:hover {
+      background-color: rgba(128, 128, 128, 0.233);
+    }
+  }
+}

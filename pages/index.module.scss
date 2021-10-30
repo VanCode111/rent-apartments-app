@@ -1,0 +1,56 @@
+.mainButton {
+  margin-bottom: 20px;
+  &_1 {
+    background: linear-gradient(135deg, #9ccefe, #919efd);
+  }
+  &_2 {
+    background: linear-gradient(135deg, #f6a9c8, #c189f6);
+  }
+  &_3 {
+    background: linear-gradient(135deg, #feae98, #f7819d);
+  }
+  &_4 {
+    background: linear-gradient(135deg, #3ceeb1, #44d6e1);
+  }
+  &_5 {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+  }
+}
+.popularRooms {
+  padding-top: 50px;
+  &__title {
+    font-size: 30px;
+  }
+}
+.mainPage {
+  &__topContent {
+    position: relative;
+    z-index: 10;
+  }
+  &__top {
+    background: url("../assets/img/background.jpg") no-repeat center;
+    background-size: cover;
+    padding-top: 150px;
+    color: white;
+
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      height: 100%;
+      z-index: 0;
+      width: 100%;
+      background: #00000052;
+    }
+
+    padding-bottom: 300px;
+    & h2 {
+      font-size: 48px;
+      font-weight: 500;
+      text-align: center;
+      margin-bottom: 50px;
+    }
+  }
+}

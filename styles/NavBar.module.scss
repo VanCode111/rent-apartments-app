@@ -1,0 +1,13 @@
+.navBar {
+  position: fixed;
+  width: 100%;
+  background-color: white;
+
+  z-index: 1;
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    height: 70px;
+    align-items: center;
+  }
+}
