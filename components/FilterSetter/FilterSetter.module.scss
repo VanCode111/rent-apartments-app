@@ -3,10 +3,15 @@
   border-radius: 50px;
   display: flex;
   color: #494949;
-  padding: 0px 5px 0px 0px;
   width: auto;
-  overflow: hidden;
+
+  //overflow: hidden;
   align-items: center;
+  position: relative;
+  &__btn {
+    position: absolute;
+    right: 5px;
+  }
   &__select + &__select {
   }
   &__selectTitle {
@@ -19,22 +24,9 @@
   &__select {
     flex: 1;
     position: relative;
-    padding-right: 38px;
-    padding-left: 30px;
     height: 70px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    &:before {
-      content: "";
-      width: 0.063em;
-      position: absolute;
-      left: 0px;
-      height: 40px;
-      background-color: rgba(0, 0, 0, 0.205);
-    }
-    &:hover {
-      background-color: rgba(128, 128, 128, 0.233);
-    }
+  }
+  &__selectMiddle {
+    flex: 2;
   }
 }

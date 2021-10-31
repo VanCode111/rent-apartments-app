@@ -4,6 +4,7 @@ import styles from "./index.module.scss";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import FilterSetter from "../components/FilterSetter/FilterSetter";
+import DateRangePicker from "../components/DateRangePicker/DateRangePicker";
 
 const selectionRange = {
   startDate: new Date(),

@@ -5,8 +5,8 @@ import Link from "next/link";
 
 interface ButtonTypes {
   onClick?: () => void;
-  className?: String;
-  type?: "circle";
+  className?: string;
+  type?: "circle" | "circleShadow";
   width?: number;
   href?: string;
   height?: number;
@@ -30,6 +30,7 @@ const Button: React.FC<ButtonTypes> = ({
           onClick={onClick}
           className={classNames(styles.button, {
             [styles[type]]: type,
+            [className]: className,
           })}
           href={href}
         >
@@ -43,6 +44,7 @@ const Button: React.FC<ButtonTypes> = ({
         style={{ width: width, height: height }}
         className={classNames(styles.button, {
           [styles[type]]: type,
+          [className]: className,
         })}
         onClick={onClick}
       >
