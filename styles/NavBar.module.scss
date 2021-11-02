@@ -10,3 +10,11 @@
     align-items: center;
   }
 }
+
+@media (max-width: 700px) {
+  .navBar {
+    &__inner {
+      height: 50px;
+    }
+  }
+}

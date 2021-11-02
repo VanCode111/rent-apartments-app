@@ -13,6 +13,7 @@ const FilterSetter = () => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+
   const setDateHandle = (date, mode) => {
     if (mode) {
       if (!endDate) {
