@@ -8,7 +8,7 @@ const NavBar = () => {
     <header className={navBar.navBar}>
       <div className="container">
         <div className={navBar.navBar__inner}>
-          <Logo width={150} height={150} />
+          <Logo width={170} height={170} />
           <Button>Войти</Button>
         </div>
       </div>

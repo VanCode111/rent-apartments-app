@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./FilterSetter.module.scss";
 import Button from "../UI/Button/Button";
 import SearchIcon from "../../assets/img/search.svg";
@@ -12,15 +12,42 @@ const FilterSetter = () => {
   const [timeMode, setTimeMode] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
   const setDateHandle = (date, mode) => {
-    const day = date.getDate();
     if (mode) {
+      if (!endDate) {
+        setTimeMode(false);
+      }
+      if (+date > endDate && endDate) {
+        setEndDate(null);
+        setTimeMode(false);
+      }
       setStartDate(date);
-      setTimeMode((prev) => !prev);
     } else {
-      setEndDate(date);
+      if (+date < startDate) {
+        setEndDate(null);
+        setStartDate(date);
+      } else {
+        setEndDate(date);
+      }
+      if (!startDate) {
+        setTimeMode(true);
+      }
     }
   };
+  useEffect(() => {
+    let isMobile = window && window.innerWidth <= 900;
+    setIsMobile(isMobile);
+  }, []);
+
+  function getTextOfDate(date) {
+    const text = date
+      ? date?.getDate() +
+        " " +
+        getMonthByNumber(date?.getMonth() + 1).slice(0, 3)
+      : null;
+    return text;
+  }
 
   function getMonthByNumber(number) {
     const today = new Date(0, number, 0);
@@ -51,8 +78,8 @@ const FilterSetter = () => {
         open={travelIsOpen}
         content={
           <DateRangePicker
-            startDate={startDate}
-            endDate={endDate}
+            selectStartDate={startDate}
+            selectEndDate={endDate}
             selectStart={setDateHandle}
             selectDayMode={timeMode}
           />
@@ -62,12 +89,8 @@ const FilterSetter = () => {
           onClick={() => setTimeHandle(true)}
           active={timeMode}
           className={styles.filterSetter__select}
-          value={
-            startDate
-              ? startDate?.getDate() + " " + startDate?.getMonth()
-              : null
-          }
-          title="Выезд"
+          value={getTextOfDate(startDate)}
+          title="Заезд"
           desc="Когда?"
         ></FilterSetterItem>
         <FilterSetterItem
@@ -78,13 +101,7 @@ const FilterSetter = () => {
             " " +
             (timeMode === false ? styles.active : "")
           }
-          value={
-            endDate
-              ? endDate?.getDate() +
-                " " +
-                getMonthByNumber(endDate?.getMonth() + 1).slice(0, 3)
-              : null
-          }
+          value={getTextOfDate(endDate)}
           title="Выезд"
           desc="Когда?"
         ></FilterSetterItem>
@@ -98,12 +115,16 @@ const FilterSetter = () => {
       ></FilterSetterItem>
       <Button
         className={styles.filterSetter__btn}
-        type="circle"
+        type={!isMobile ? "circle" : null}
         href="/search?visitors=2"
-        width={60}
+        width={!isMobile && 60}
         height={60}
       >
-        <Image src={SearchIcon} width="20" height="20"></Image>
+        {isMobile ? (
+          "Найти жильё"
+        ) : (
+          <Image src={SearchIcon} width="20" height="20"></Image>
+        )}
       </Button>
     </div>
   );

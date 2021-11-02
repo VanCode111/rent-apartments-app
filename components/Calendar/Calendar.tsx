@@ -18,11 +18,10 @@ const Calendar: React.FC<CalendarTypes> = ({
   selectEndDay,
 }) => {
   const [monthDays, setMonthDays] = useState([]);
-  console.log(selectEndDay, selectStartDay);
+  let todayDate;
   const weeks = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
   let dayWeek = new Date(2021, month - 1, 1).getDay();
   dayWeek = dayWeek == 0 ? 6 : dayWeek - 1;
-  let todayDate;
   const countDays = 32 - new Date(year, month - 1, 32).getDate();
   let currentMonth = getMonthByNumber(month);
   currentMonth =
@@ -42,10 +41,13 @@ const Calendar: React.FC<CalendarTypes> = ({
     return todayDate;
   };
 
+  todayDate = setTodayDate();
+
   const setDays = () => {
     const dates = [];
     for (let i = 1; i <= countDays + dayWeek; i++) {
       const currentDate = new Date(year, month - 1, i - dayWeek);
+      console.log(currentDate, todayDate);
       dates.push(
         <div
           onClick={() => clickDay(currentDate)}
@@ -55,7 +57,10 @@ const Calendar: React.FC<CalendarTypes> = ({
             [styles.selectStart]: +selectStartDay == +currentDate,
             [styles.selectEnd]: +selectEndDay == +currentDate,
             [styles.middle]:
-              currentDate >= selectStartDay && currentDate <= selectEndDay,
+              currentDate >= selectStartDay &&
+              currentDate <= selectEndDay &&
+              selectEndDay &&
+              selectStartDay,
           })}
         >
           <p className={styles.dateRangePicker__dayItemNumber}>
@@ -66,9 +71,6 @@ const Calendar: React.FC<CalendarTypes> = ({
     }
     setMonthDays(dates);
   };
-  useEffect(() => {
-    todayDate = setTodayDate();
-  }, []);
 
   useEffect(() => {
     setDays();

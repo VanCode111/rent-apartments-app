@@ -11,17 +11,20 @@ interface DropDownTypes {
 const DropDown = ({ open, content, children, className, clickOutside }) => {
   const contentRef = useRef<HTMLHeadingElement>();
   useEffect(() => {
-    document.addEventListener("click", (e) => {
+    document.addEventListener("mousedown", (e) => {
+      console.log(e);
       if (!contentRef) {
         return;
       }
-      if (e.target instanceof HTMLDivElement) {
+      if (e.target instanceof HTMLElement) {
         if (!contentRef.current.contains(e.target)) {
           clickOutside();
         }
       }
     });
-    return () => {};
+    return () => {
+      //document.removeEventListener('click');
+    };
   }, [contentRef]);
 
   return (

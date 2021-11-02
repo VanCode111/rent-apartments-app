@@ -8,21 +8,17 @@ let dayMode;
 const DateRangePicker = ({
   selectDayMode,
   selectStart,
-  startDate,
-  endDate,
+  selectStartDate,
+  selectEndDate,
 }) => {
   const currentDate = new Date();
-  const [selectStartDay, setSelectStartDay] = useState(startDate);
-  const [selectEndDay, setSelectEndDay] = useState(endDate);
   const [currentMonth, setCurrentMonth] = useState(currentDate.getMonth() + 1);
   dayMode = selectDayMode;
   const clickDayHandle = (date) => {
     if (dayMode) {
-      setSelectStartDay(date);
       selectStart(date, true);
     } else {
       selectStart(date, false);
-      setSelectEndDay(date);
     }
   };
 
@@ -53,8 +49,8 @@ const DateRangePicker = ({
         <Calendar
           month={currentMonth}
           clickDay={clickDayHandle}
-          selectStartDay={selectStartDay}
-          selectEndDay={selectEndDay}
+          selectStartDay={selectStartDate}
+          selectEndDay={selectEndDate}
           year={new Date(
             currentDate.getFullYear(),
             currentMonth - 1
@@ -63,8 +59,8 @@ const DateRangePicker = ({
         <Calendar
           month={currentMonth + 1}
           clickDay={clickDayHandle}
-          selectStartDay={selectStartDay}
-          selectEndDay={selectEndDay}
+          selectStartDay={selectStartDate}
+          selectEndDay={selectEndDate}
           year={new Date(currentDate.getFullYear(), currentMonth).getFullYear()}
         />
       </div>

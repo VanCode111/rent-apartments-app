@@ -55,11 +55,6 @@
   }
 }
 
-.disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
 .middle {
   border-radius: 0;
   background-color: rgb(247, 247, 247);
@@ -74,14 +69,13 @@
   }
 }
 
-.selectStart {
-  color: white;
-  border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
-}
-
 .selectEnd,
 .selectStart {
+  &:hover {
+    &:before {
+      border: none;
+    }
+  }
   &:before {
     content: "";
     position: absolute;
@@ -98,4 +92,15 @@
   color: white;
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
+}
+
+.selectStart {
+  color: white;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
