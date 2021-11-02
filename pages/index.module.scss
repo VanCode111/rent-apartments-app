@@ -26,7 +26,8 @@
       height: 100%;
       z-index: 0;
       width: 100%;
-      background: #00000052;
+      background: black;
+      opacity: 0.4;
     }
 
     padding-bottom: 300px;
@@ -43,9 +44,9 @@
 @media (max-width: 900px) {
   .mainPage {
     &__top {
-      background: $main-gradient;
+      padding-bottom: 100px;
       &:after {
-        background: none;
+        opacity: 0.5;
       }
       & h2 {
         //text-align: left;
