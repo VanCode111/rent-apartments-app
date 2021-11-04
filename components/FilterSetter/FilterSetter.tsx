@@ -3,16 +3,34 @@ import styles from "./FilterSetter.module.scss";
 import Button from "../UI/Button/Button";
 import SearchIcon from "../../assets/img/search.svg";
 import Image from "next/image";
+import Select from "../UI/Select/Selects";
 import DropDown from "../../components/UI/DropDown/DropDown";
 import DateRangePicker from "../DateRangePicker/DateRangePicker";
 import FilterSetterItem from "./FIlterlSetterItem/FilterSetterItem";
+import { YMaps, Map } from "react-yandex-maps";
 
 const FilterSetter = () => {
   const [travelIsOpen, setTravelIsOpen] = useState(false);
   const [timeMode, setTimeMode] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const [suggests, setSuggests] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
+  const [ymaps, setYmaps] = useState(null);
+
+  const changePlaceText = async (e) => {
+    const text = e.target.value;
+    if (ymaps) {
+      let suggests = await ymaps.suggest(text);
+      console.log(suggests);
+      suggests = suggests.map((item) => item.displayName);
+      setSuggests(suggests);
+    }
+  };
+
+  const loadSuggest = (ymaps) => {
+    setYmaps(ymaps);
+  };
 
   const setDateHandle = (date, mode) => {
     if (mode) {
@@ -62,12 +80,29 @@ const FilterSetter = () => {
 
   return (
     <div className={styles.filterSetter}>
-      <FilterSetterItem
-        onClick={() => console.log("")}
+      <div style={{ display: "none" }}>
+        <YMaps>
+          <Map
+            onLoad={(ymaps) => loadSuggest(ymaps)}
+            defaultState={{ center: [55.75, 37.57], zoom: 9 }}
+            modules={["suggest"]}
+          />
+        </YMaps>
+      </div>
+      <Select
         className={styles.filterSetter__select}
-        title="Количество комнат"
-        desc="1, 2 комн."
-      ></FilterSetterItem>
+        onClick={() => console.log("aaa")}
+        items={suggests}
+      >
+        <FilterSetterItem
+          onChange={changePlaceText}
+          onClick={() => console.log("")}
+          className={styles.filterSetter__select}
+          title="Местоположение"
+          desc="Город, адрес"
+        ></FilterSetterItem>
+      </Select>
+
       <DropDown
         clickOutside={() => {
           setTravelIsOpen(false);

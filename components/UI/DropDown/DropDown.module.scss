@@ -1,8 +1,12 @@
 .dropDown {
   position: relative;
+
   &__content {
+    margin-top: 10px;
     position: absolute;
     left: 50%;
+    background-color: white;
+    border-radius: 18px;
     transform: translate(-50%, 0);
     z-index: 10;
   }
@@ -10,4 +14,9 @@
     flex: 1;
     display: flex;
   }
+}
+
+.left {
+  left: 0;
+  transform: translate(0, 0);
 }

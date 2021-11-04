@@ -9,6 +9,14 @@
   &__content {
     position: relative;
     z-index: 11;
+    & input {
+      border: none;
+      background-color: transparent;
+      outline: none;
+      font-weight: 500;
+      color: black;
+      font-size: 16px;
+    }
   }
   flex: 1;
   position: relative;
@@ -34,6 +42,7 @@
 .value {
   font-weight: 500;
   color: black;
+  font-size: 16px;
 }
 
 .active {

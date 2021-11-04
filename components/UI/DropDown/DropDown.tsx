@@ -4,14 +4,22 @@ import styles from "./DropDown.module.scss";
 interface DropDownTypes {
   content: React.ReactNode;
   open: boolean;
-  className: string;
+  className?: string;
+  orientation?: "left" | "center" | "right";
   clickOutside: () => void;
 }
 
-const DropDown = ({ open, content, children, className, clickOutside }) => {
+const DropDown = ({
+  open,
+  content,
+  children,
+  className,
+  clickOutside,
+  orientation,
+}) => {
   const contentRef = useRef<HTMLHeadingElement>();
   useEffect(() => {
-    document.addEventListener("mousedown", (e) => {
+    function onClickHandle(e) {
       console.log(e);
       if (!contentRef) {
         return;
@@ -21,9 +29,10 @@ const DropDown = ({ open, content, children, className, clickOutside }) => {
           clickOutside();
         }
       }
-    });
+    }
+    document.addEventListener("mousedown", onClickHandle);
     return () => {
-      //document.removeEventListener('click');
+      document.removeEventListener("click", onClickHandle);
     };
   }, [contentRef]);
 
@@ -34,7 +43,11 @@ const DropDown = ({ open, content, children, className, clickOutside }) => {
     >
       <div className={styles.dropDown__top}>{children}</div>
 
-      {open && <div className={styles.dropDown__content}>{content}</div>}
+      {open && (
+        <div className={styles.dropDown__content + " " + styles[orientation]}>
+          {content}
+        </div>
+      )}
     </div>
   );
 };
