@@ -16,7 +16,7 @@ const Index = () => {
   return (
     <MainLayout>
       <section className={styles.main}>
-        <RentObjects className={styles.main__objects} />
+        <RentObjects bbox={bbox} className={styles.main__objects} />
         <Map bbox={bbox}></Map>
       </section>
     </MainLayout>

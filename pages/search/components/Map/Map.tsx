@@ -88,58 +88,6 @@ const Map: React.FC<mapTypes> = ({ marks, bbox }) => {
             ></Placemark>
           );
         })}
-        <Placemark
-          geometry={[55.725564, 37.679224]}
-          instanceRef={(ref) => {
-            if (!ref) {
-              return;
-            }
-            ref.events.add("mouseenter", (e) => {
-              console.log(
-                e
-                  .get("target")
-                  .options.set("iconContentLayout", createMark(ymaps, "hover"))
-              );
-            });
-            ref.events.add("mouseleave", (e) => {
-              console.log(
-                e
-                  .get("target")
-                  .options.set("iconContentLayout", createMark(ymaps, ""))
-              );
-            });
-          }}
-          options={{
-            iconLayout: "default#imageWithContent",
-            iconImageHref: "",
-            iconContentLayout: templateMark?.template,
-            iconImageSize: [100, 42],
-            iconContentSize: [100, 42],
-            iconImageOffset: [0, 0],
-          }}
-        ></Placemark>
-        <Placemark geometry={[55.525564, 37.679224]}></Placemark>
-        <Placemark
-          instanceRef={(ref) => {
-            ref &&
-              ref.events.add("click", (e) => {
-                console.log(e);
-              });
-          }}
-          events={{
-            mouseenter: () => {
-              console.log(1);
-            },
-          }}
-          geometry={[56.725564, 37.679224]}
-          modules={["geoObject.addon.balloon"]}
-          options={{
-            iconLayout: "default#imageWithContent",
-            iconContentLayout: templateMark?.template,
-            iconContentSize: [100, 100],
-            iconContentOffset: [10, 10],
-          }}
-        ></Placemark>
       </YMapInner>
     </YMaps>
   );
