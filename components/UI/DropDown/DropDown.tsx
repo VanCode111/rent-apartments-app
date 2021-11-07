@@ -20,8 +20,7 @@ const DropDown = ({
   const contentRef = useRef<HTMLHeadingElement>();
   useEffect(() => {
     function onClickHandle(e) {
-      console.log(e);
-      if (!contentRef) {
+      if (!contentRef.current) {
         return;
       }
       if (e.target instanceof HTMLElement) {
