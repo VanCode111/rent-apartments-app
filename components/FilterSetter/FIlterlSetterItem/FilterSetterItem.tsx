@@ -21,7 +21,6 @@ const FilterSetterItem: React.FC<filterTypes> = ({
   active,
 }) => {
   const isWithInput = onChange ? true : false;
-  //const refInput = useRef();
   const clickHandle = () => {
     if (isWithInput) {
       document.getElementById("input").focus();
@@ -41,6 +40,7 @@ const FilterSetterItem: React.FC<filterTypes> = ({
           <input
             id="input"
             placeholder={desc}
+            value={value}
             onChange={onChange}
             type="text"
           />

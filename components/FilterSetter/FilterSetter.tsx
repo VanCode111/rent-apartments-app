@@ -3,6 +3,7 @@ import styles from "./FilterSetter.module.scss";
 import Button from "../UI/Button/Button";
 import SearchIcon from "../../assets/img/search.svg";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import Select from "../UI/Select/Selects";
 import DropDown from "../../components/UI/DropDown/DropDown";
 import DateRangePicker from "../DateRangePicker/DateRangePicker";
@@ -11,19 +12,50 @@ import { YMaps, Map } from "react-yandex-maps";
 
 const FilterSetter = () => {
   const [travelIsOpen, setTravelIsOpen] = useState(false);
+  const [placeIsOpen, setPlaceIsOpen] = useState(false);
   const [timeMode, setTimeMode] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [suggests, setSuggests] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
   const [ymaps, setYmaps] = useState(null);
+  const [place, setPlace] = useState("");
+  const router = useRouter();
+
+  const choosePlace = (value) => {
+    setPlace(value);
+  };
+
+  const getBboxByPlace = async (place: string) => {
+    const res = await fetch(
+      "https://nominatim.openstreetmap.org/?addressdetails=1&format=json&limit=1&" +
+        "q=" +
+        place
+    );
+    const data = await res.json();
+    console.log(data);
+    return data[0]?.boundingbox;
+  };
+
+  const searchHandle = async () => {
+    const bbox = await getBboxByPlace(place);
+    console.log(bbox);
+    if (!bbox) {
+      return;
+    }
+    router.push({
+      pathname: "/search",
+      query: { bbox1: bbox[0], bbox2: bbox[1], bbox3: bbox[2], bbox4: bbox[3] },
+    });
+  };
 
   const changePlaceText = async (e) => {
     const text = e.target.value;
+    setPlace(text);
     if (ymaps) {
       let suggests = await ymaps.suggest(text);
       console.log(suggests);
-      suggests = suggests.map((item) => item.displayName);
+      suggests = suggests.map((item) => item.value);
       setSuggests(suggests);
     }
   };
@@ -91,19 +123,24 @@ const FilterSetter = () => {
       </div>
       <Select
         className={styles.filterSetter__select}
-        onClick={() => console.log("aaa")}
+        onClick={choosePlace}
+        open={placeIsOpen}
+        clickOutSide={() => setPlaceIsOpen(false)}
         items={suggests}
       >
         <FilterSetterItem
           onChange={changePlaceText}
-          onClick={() => console.log("")}
+          onClick={() => setPlaceIsOpen(true)}
           className={styles.filterSetter__select}
           title="Местоположение"
           desc="Город, адрес"
+          active={placeIsOpen}
+          value={place}
         ></FilterSetterItem>
       </Select>
 
       <DropDown
+        orientation={"center"}
         clickOutside={() => {
           setTravelIsOpen(false);
           setTimeMode(null);
@@ -152,7 +189,7 @@ const FilterSetter = () => {
       <Button
         className={styles.filterSetter__btn}
         type={!isMobile ? "circle" : null}
-        href="/search?visitors=2"
+        onClick={searchHandle}
         width={!isMobile && 60}
         height={60}
       >

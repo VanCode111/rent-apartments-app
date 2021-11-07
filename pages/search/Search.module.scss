@@ -1,0 +1,13 @@
+.map {
+  height: calc(100vh - 70px);
+  // width: 500px;
+  width: 40%;
+}
+
+.main {
+  &__objects {
+    width: 60%;
+  }
+  display: flex;
+  justify-content: space-between;
+}

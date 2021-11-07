@@ -1,23 +1,24 @@
 import React from "react";
 import styles from "./Search.module.scss";
+import { useRouter } from "next/router";
 import MainLayout from "../../layouts/MainLayout";
-import { YMaps, Map } from "react-yandex-maps";
+import RentObjects from "../../components/rentObjects/rentObjects";
+import Map from "./components/Map/Map";
 
 const Index = () => {
-  const loadSuggest = (ymaps) => {
-    const suggestView = new ymaps.SuggestView("suggest");
-  };
-
+  const router = useRouter();
+  const { bbox1, bbox2, bbox3, bbox4 } = router.query;
+  const bbox = [
+    [+bbox1, +bbox3],
+    [+bbox2, +bbox4],
+  ];
+  console.log(bbox);
   return (
     <MainLayout>
-      <input type="text" className="form-control" id="suggest" />
-      <YMaps>
-        <Map
-          onLoad={(ymaps) => loadSuggest(ymaps)}
-          defaultState={{ center: [55.75, 37.57], zoom: 9 }}
-          modules={["SuggestView"]}
-        />
-      </YMaps>
+      <section className={styles.main}>
+        <RentObjects className={styles.main__objects} />
+        <Map bbox={bbox}></Map>
+      </section>
     </MainLayout>
   );
 };

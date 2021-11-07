@@ -1,0 +1,38 @@
+.apartment {
+  background-color: white;
+  width: 100%;
+  border-radius: 18px;
+  height: 200px;
+  padding: 10px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.img {
+  width: auto;
+  height: 100%;
+  border-radius: 18px;
+}
+
+.content {
+  height: 100%;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  font-weight: 500;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 20px;
+  width: 100%;
+  text-align: right;
+  & span {
+    font-weight: 500;
+  }
+}

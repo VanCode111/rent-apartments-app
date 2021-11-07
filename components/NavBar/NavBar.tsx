@@ -6,11 +6,9 @@ import Logo from "../UI/Icons/Logo";
 const NavBar = () => {
   return (
     <header className={navBar.navBar}>
-      <div className="container">
-        <div className={navBar.navBar__inner}>
-          <Logo width={170} height={170} />
-          <Button>Войти</Button>
-        </div>
+      <div className={navBar.navBar__inner}>
+        <Logo width={170} height={170} />
+        <Button>Войти</Button>
       </div>
     </header>
   );

@@ -1,25 +1,30 @@
 import React from "react";
 import styles from "./Select.module.scss";
 import DropDown from "../DropDown/DropDown";
+import GeoIcon from "../../UI/Icons/GeoIcon";
 
 interface SelectTypes {
   onClick: (text: string) => void;
   items: Array<string>;
   className: string;
+  open: boolean;
+  clickOutSide: () => void;
 }
 
 const Selects: React.FC<SelectTypes> = ({
   onClick,
+  open,
   items,
+  clickOutSide,
   children,
   className,
 }) => {
   return (
     <DropDown
-      open={true}
+      open={open}
       orientation={"left"}
       className={styles.select + " " + className}
-      clickOutside={() => console.log("a")}
+      clickOutside={clickOutSide}
       content={
         <ul className={styles.select__list}>
           {items.map((item, index) => {
@@ -29,7 +34,10 @@ const Selects: React.FC<SelectTypes> = ({
                 onClick={() => onClick(item)}
                 key={index}
               >
-                {item}
+                <div className={styles.geoIcon}>
+                  <GeoIcon />
+                </div>
+                <p>{item}</p>
               </li>
             );
           })}
