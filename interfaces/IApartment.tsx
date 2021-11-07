@@ -3,4 +3,5 @@ export default interface IApartment {
   title: string;
   img: string;
   price: number;
+  location: Array<number>;
 }

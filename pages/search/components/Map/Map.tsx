@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { YMaps, Map as YMapInner, Placemark } from "react-yandex-maps";
-//import "../../MapPoints.css";
+import IApartment from "../../../../interfaces/IApartment";
 interface mapTypes {
-  marks?: React.ReactNode;
+  marks?: Array<IApartment>;
   bbox: Array<Array<number>>;
 }
 
@@ -72,10 +72,10 @@ const Map: React.FC<mapTypes> = ({ marks, bbox }) => {
           bounds: bbox,
         }}
       >
-        {apartments.map((item) => {
+        {marks.map((item) => {
           return (
             <Placemark
-              geometry={item.geometry}
+              geometry={item.location}
               key={item.id}
               options={{
                 iconLayout: "default#imageWithContent",
