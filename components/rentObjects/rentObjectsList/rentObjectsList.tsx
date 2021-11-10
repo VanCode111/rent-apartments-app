@@ -5,11 +5,15 @@ import IApartment from "../../../interfaces/IApartment";
 
 interface rentObjectsListTypes {
   apartments: Array<IApartment>;
+  className?: string;
 }
 
-const rentObjectsList: React.FC<rentObjectsListTypes> = ({ apartments }) => {
+const rentObjectsList: React.FC<rentObjectsListTypes> = ({
+  apartments,
+  className,
+}) => {
   return (
-    <div className={styles.list}>
+    <div className={styles.list + " " + (className && className)}>
       {apartments.map((apartment) => {
         return (
           <RentObject className={styles.apartment} apartment={apartment} />

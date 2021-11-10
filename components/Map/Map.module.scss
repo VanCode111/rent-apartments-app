@@ -1,0 +1,14 @@
+.map {
+  position: relative;
+}
+
+.btnArrow {
+  transform: rotate(180deg);
+  & svg {
+    width: 12px;
+    height: 12px;
+    & path {
+      fill: 494949;
+    }
+  }
+}

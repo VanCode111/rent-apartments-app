@@ -2,8 +2,8 @@
   background-color: white;
   width: 100%;
   border-radius: 18px;
-  height: 200px;
-  padding: 10px;
+  height: 230px;
+  //padding: 10px;
   display: flex;
   gap: 20px;
   align-items: center;
@@ -17,6 +17,7 @@
 
 .content {
   height: 100%;
+  padding: 10px;
   display: flex;
   flex-grow: 1;
   flex-direction: column;
