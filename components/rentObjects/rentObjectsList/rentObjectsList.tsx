@@ -16,7 +16,11 @@ const rentObjectsList: React.FC<rentObjectsListTypes> = ({
     <div className={styles.list + " " + (className && className)}>
       {apartments.map((apartment) => {
         return (
-          <RentObject className={styles.apartment} apartment={apartment} />
+          <RentObject
+            key={apartment.id}
+            className={styles.apartment}
+            apartment={apartment}
+          />
         );
       })}
     </div>

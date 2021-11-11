@@ -10,7 +10,7 @@ interface rentObjectsTypes {
   bbox: Array<Array<number>>;
 }
 
-const rentObjects: React.FC<rentObjectsTypes> = ({
+const RentObjects: React.FC<rentObjectsTypes> = ({
   className,
   bbox,
   loadObjects,
@@ -52,4 +52,4 @@ const rentObjects: React.FC<rentObjectsTypes> = ({
   );
 };
 
-export default rentObjects;
+export default RentObjects;

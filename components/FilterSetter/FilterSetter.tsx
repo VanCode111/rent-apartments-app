@@ -196,7 +196,7 @@ const FilterSetter = () => {
         {isMobile ? (
           "Найти жильё"
         ) : (
-          <Image src={SearchIcon} width="20" height="20"></Image>
+          <Image alt='image' src={SearchIcon} width="20" height="20"></Image>
         )}
       </Button>
     </div>

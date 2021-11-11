@@ -43,36 +43,36 @@ const Calendar: React.FC<CalendarTypes> = ({
 
   todayDate = setTodayDate();
 
-  const setDays = () => {
-    const dates = [];
-    for (let i = 1; i <= countDays + dayWeek; i++) {
-      const currentDate = new Date(year, month - 1, i - dayWeek);
-      console.log(currentDate, todayDate);
-      dates.push(
-        <div
-          onClick={() => clickDay(currentDate)}
-          key={i}
-          className={classNames(styles.dateRangePicker__dayItem, {
-            [styles.disabled]: +todayDate > +currentDate,
-            [styles.selectStart]: +selectStartDay == +currentDate,
-            [styles.selectEnd]: +selectEndDay == +currentDate,
-            [styles.middle]:
-              currentDate >= selectStartDay &&
-              currentDate <= selectEndDay &&
-              selectEndDay &&
-              selectStartDay,
-          })}
-        >
-          <p className={styles.dateRangePicker__dayItemNumber}>
-            {i - dayWeek < 1 ? "" : i - dayWeek}
-          </p>
-        </div>
-      );
-    }
-    setMonthDays(dates);
-  };
-
   useEffect(() => {
+    const setDays = () => {
+      const dates = [];
+      for (let i = 1; i <= countDays + dayWeek; i++) {
+        const currentDate = new Date(year, month - 1, i - dayWeek);
+        console.log(currentDate, todayDate);
+        dates.push(
+          <div
+            onClick={() => clickDay(currentDate)}
+            key={i}
+            className={classNames(styles.dateRangePicker__dayItem, {
+              [styles.disabled]: +todayDate > +currentDate,
+              [styles.selectStart]: +selectStartDay == +currentDate,
+              [styles.selectEnd]: +selectEndDay == +currentDate,
+              [styles.middle]:
+                currentDate >= selectStartDay &&
+                currentDate <= selectEndDay &&
+                selectEndDay &&
+                selectStartDay,
+            })}
+          >
+            <p className={styles.dateRangePicker__dayItemNumber}>
+              {i - dayWeek < 1 ? "" : i - dayWeek}
+            </p>
+          </div>
+        );
+      }
+      setMonthDays(dates);
+    };
+
     setDays();
   }, [month, selectStartDay, selectEndDay]);
 

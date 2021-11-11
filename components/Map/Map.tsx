@@ -89,7 +89,7 @@ const Map: React.FC<mapTypes> = ({
               }
               inst.container.fitToViewport();
               setTimeout(() => {
-                fitContainer(delay - 10);
+                fitContainer(delay - 1);
               }, 10);
             }
             fitContainer(500);
