@@ -26,11 +26,16 @@ const RentObjects: React.FC<rentObjectsTypes> = ({
       return;
     }
     async function getApartments() {
-      const res = await fetch(
-        "http://localhost:3000/api/apartments" + `?bbox=${bbox}`
-      );
-      const apartments = await res.json();
-      setApartments(apartments);
+      try {
+        const res = await fetch(
+          "http://localhost:3000/api/apartments" + `?bbox=${bbox}`
+        );
+        const apartments = await res.json();
+        setApartments(apartments);
+      } catch (e) {
+        console.log(e);
+      }
+
       loadObjects(apartments);
     }
     getApartments();
