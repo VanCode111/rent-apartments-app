@@ -36,7 +36,7 @@ const RentObjects: React.FC<rentObjectsTypes> = ({
         console.log(e);
       }
 
-      loadObjects(apartments);
+      //loadObjects(apartments);
     }
     getApartments();
   }, [bbox]);
